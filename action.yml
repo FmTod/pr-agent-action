@@ -1,0 +1,20 @@
+name: 'PR Agent'
+description: 'AI agent for pull requests'
+
+inputs:
+  github_token:
+    description: 'GITHUB_TOKEN'
+    default: '${{ github.token }}'
+  openai_key:
+    description: 'OPENAI_KEY'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - id: pragent
+      name: PR Agent action step
+      uses: Codium-ai/pr-agent@main
+      env:
+        OPENAI_KEY: ${{ inputs.openai_key }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
